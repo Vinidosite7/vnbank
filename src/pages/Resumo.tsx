@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useFinanceStore } from '@/store/finance-store'
 import { PageWrapper } from '@/components/layout/PageWrapper'
-import { ArrowDownLeft, ArrowUpRight, TrendingUp, TrendingDown, CreditCard, Landmark, Tag, AlertCircle } from 'lucide-react'
+import { TrendingUp, TrendingDown, CreditCard, Landmark, Tag, AlertCircle } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
 import {
   calculateMonthlyIncome, calculateMonthlyExpense, calculateMonthlyResult,
@@ -31,14 +31,14 @@ function SpotlightCard({ children, className = '', glowColor = 'rgba(255,255,255
 }
 
 function BeamProgress({ value, color = '#4ade80', glow = 'rgba(74,222,128,0.4)' }: { value: number; color?: string; glow?: string }) {
-  const [w, setW] = useState(0)
+  const [width, setWidth] = useState(0)
   useEffect(() => {
-    const t = setTimeout(() => setW(Math.min(value, 100)), 100)
+    const t = setTimeout(() => setWidth(Math.min(value, 100)), 100)
     return () => clearTimeout(t)
   }, [value])
   return (
     <div className="relative h-1 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }}>
-      <div className="absolute top-0 left-0 h-full rounded-full" style={{ width: `${Math.min(value, 100)}%`, background: color, boxShadow: `0 0 8px ${glow}`, transition: 'width 0.9s cubic-bezier(0.16,1,0.3,1)' }} />
+      <div className="absolute top-0 left-0 h-full rounded-full" style={{ width: `${width}%`, background: color, boxShadow: `0 0 8px ${glow}`, transition: 'width 0.9s cubic-bezier(0.16,1,0.3,1)' }} />
     </div>
   )
 }

@@ -4,8 +4,8 @@ import { PageWrapper } from '@/components/layout/PageWrapper'
 import { Target, Zap, Trophy, Check, TrendingUp } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
 
-function SpotlightCard({ children, className = '', glowColor = 'rgba(255,255,255,0.05)' }: {
-  children: React.ReactNode; className?: string; glowColor?: string
+function SpotlightCard({ children, className = '', glowColor = 'rgba(255,255,255,0.05)', style }: {
+  children: React.ReactNode; className?: string; glowColor?: string; style?: React.CSSProperties
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [pos, setPos] = useState({ x: 0, y: 0 })
@@ -15,7 +15,7 @@ function SpotlightCard({ children, className = '', glowColor = 'rgba(255,255,255
       onMouseMove={e => { const r = ref.current?.getBoundingClientRect(); if (r) setPos({ x: e.clientX - r.left, y: e.clientY - r.top }) }}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       className={`relative overflow-hidden rounded-xl ${className}`}
-      style={{ background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.06)' }}
+      style={{ background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.06)', ...style }}
     >
       <div className="pointer-events-none absolute inset-0 transition-opacity duration-300"
         style={{ opacity: hover ? 1 : 0, background: `radial-gradient(260px circle at ${pos.x}px ${pos.y}px, ${glowColor}, transparent 70%)` }} />

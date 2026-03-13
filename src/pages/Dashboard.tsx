@@ -5,7 +5,7 @@ import { PageWrapper } from '@/components/layout/PageWrapper'
 import {
   Wallet, CreditCard, TrendingDown, TrendingUp,
   PiggyBank, Target, HandCoins, AlertCircle,
-  Clock, CheckCircle2, ChevronRight, Loader2, Zap
+  Clock, CheckCircle2, ChevronRight, Zap
 } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
 import confetti from 'canvas-confetti'
@@ -22,7 +22,7 @@ interface DashData {
 }
 
 // ─── Animated Number ─────────────────────────────────────────────────────────
-function AnimatedNumber({ value, prefix = 'R$\u00a0', className = '' }: { value: number; prefix?: string; className?: string }) {
+function AnimatedNumber({ value, className = '' }: { value: number; className?: string }) {
   const [display, setDisplay] = useState(0)
   const ref = useRef(value)
 
@@ -186,7 +186,7 @@ export default function DashboardPage() {
   const superMetaBatida = lucroAtual >= superMeta && superMeta > 0
 
   useEffect(() => {
-    if (metaBatida) confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#4ade80', '#ffffff', '#86efac'] })
+    if (metaBatida) confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } })
   }, [metaBatida])
 
   const totalDevido = debts.reduce((s, d) => s + (d.valor - d.valor_recebido), 0)
@@ -285,7 +285,6 @@ export default function DashboardPage() {
             </div>
             <AnimatedNumber
               value={data.totalBalance}
-              prefix="R$\u00a0"
               className="text-base font-bold text-white"
             />
           </SpotlightCard>
@@ -300,7 +299,6 @@ export default function DashboardPage() {
             </div>
             <AnimatedNumber
               value={data.totalCreditDebt}
-              prefix="R$\u00a0"
               className="text-base font-bold text-red-400"
             />
           </SpotlightCard>
@@ -315,7 +313,6 @@ export default function DashboardPage() {
             </div>
             <AnimatedNumber
               value={data.projectedBalance}
-              prefix="R$\u00a0"
               className={`text-base font-bold ${data.projectedBalance >= 0 ? 'text-purple-400' : 'text-red-400'}`}
             />
           </SpotlightCard>
@@ -330,7 +327,6 @@ export default function DashboardPage() {
             </div>
             <AnimatedNumber
               value={totalDevido}
-              prefix="R$\u00a0"
               className="text-base font-bold text-orange-400"
             />
           </SpotlightCard>
